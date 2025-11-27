@@ -8,8 +8,8 @@ export const api:AxiosInstance = axios.create({
 })
 
 api.interceptors.request.use((config) => {
-    const token=import.meta.env.VITE_TMDB_ACCESS_TOKEN;
-    config.headers.Authorization=`Bearer ${token}`;
+  const apiKey = import.meta.env.VITE_API_KEY;
+  config.params = { ...config.params, api_key: apiKey };
     return config;
 },
 (error) => {
