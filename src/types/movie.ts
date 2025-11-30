@@ -1,7 +1,12 @@
 export interface Movie {
     id:number;
-    original_title:string;
+    title:string;
     bannerUrl:string;
     overview:string;
     poster_path:string;
 }
+
+export interface movieProps {
+  movie?: Movie;
+}
+
