@@ -10,3 +10,10 @@ export interface movieProps {
   movie?: Movie;
 }
 
+export interface MovieSectionProps {
+  title: string;
+  endpoint: string;
+  limit?: number;
+}
+
+
