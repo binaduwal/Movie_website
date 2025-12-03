@@ -4,6 +4,7 @@ import MainLayout from "../layouts/MainLayout";
 import Trending from "../pages/Trending";
 import TopRated from "../pages/TopRated";
 import Popular from "../pages/Popular";
+import MovieDetail from "../pages/MovieDetail";
 
 export default function AppRoutes() {
   return (
@@ -13,6 +14,7 @@ export default function AppRoutes() {
         <Route path="/trending" element={<Trending />} />
         <Route path="/top-rated" element={<TopRated />} />
         <Route path="/popular" element={<Popular />} />
+        <Route path="/movie/:id" element={<MovieDetail />} />
       </Route>
     </Routes>
   );

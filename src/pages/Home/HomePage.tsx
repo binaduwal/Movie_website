@@ -40,8 +40,8 @@ const HomePage = () => {
         </Slider>
       </div>
 
-      <MovieSection title="Popular" endpoint="3/tv/popular" limit={10} />
-      <MovieSection title="Top Rated" endpoint="/3/movie/top_rated" limit={10} />
+      <MovieSection title="Popular" endpoint="3/tv/popular" movieType="tv" limit={10} />
+      <MovieSection title="Top Rated Movies" endpoint="/3/movie/top_rated" movieType="movie" limit={10} />
     </div>
   );
 };
