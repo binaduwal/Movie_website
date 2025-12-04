@@ -1,10 +1,8 @@
 import type { MovieSectionProps } from '../../types/movie'
 import SectionTitle from '../common/SectionTitle'
-import { useMovies } from '../../hooks/useMovies';
 import MovieCard from './MovieCard';
 
-const MovieSection = ({title,endpoint,limit=10,movieType}:MovieSectionProps) => {
-    const {movies}=useMovies(endpoint,limit);
+const MovieSection = ({title,movies,movieType}:MovieSectionProps) => {
   return (
     <div className='max-w-7xl mx-auto px-4 mb-12'>
       <SectionTitle>{title}</SectionTitle>

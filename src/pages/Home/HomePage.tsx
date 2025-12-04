@@ -7,13 +7,34 @@ import "slick-carousel/slick/slick-theme.css";
 import MovieBanner from "../../components/movie/movieBanner";
 import MovieSection from "../../components/movie/MovieSection";
 const HomePage = () => {
-  const [movies, setMovies] = useState<Movie[]>([]);
+    const [nowPlaying, setNowPlaying] = useState<Movie[]>([]);
+  const [popular, setPopular] = useState<Movie[]>([]);
+  const [topRated, setTopRated] = useState<Movie[]>([]);
+  const [upcoming, setUpcoming] = useState<Movie[]>([]);
   useEffect(() => {
     const loadMovies = async () => {
-      const response = await api.get(`/3/movie/now_playing`);
-      setMovies(response.data.results.slice(0, 6));
-    };
+     try {
+      const [
+  nowPlayingRes,
+  popularRes,
+  topRatedRes,
+  upcomingRes,
+] = await Promise.all([
+  api.get(`/3/movie/now_playing`),
+  api.get(`/3/tv/popular`),
+  api.get(`/3/movie/top_rated`),
+  api.get(`/3/discover/movie`),
+]);
+ setNowPlaying(nowPlayingRes.data.results.slice(0, 6));
+        setPopular(popularRes.data.results.slice(0, 10));
+        setTopRated(topRatedRes.data.results.slice(0, 10));
+        setUpcoming(upcomingRes.data.results.slice(0, 10));
+      } catch (error) {
+              console.error("Error loading movies", error);
+     }
+     }
     loadMovies();
+
   }, []);
 
   const settings = {
@@ -27,12 +48,13 @@ const HomePage = () => {
     arrows: true,
     swipe: true,
   };
-  console.log(movies, "results");
+
+  console.log(nowPlaying, "results");
   return (
     <div className="overflow-x-hidden">
       <div className="w-full">
         <Slider {...settings} className="mb-12 rounded-2xl">
-          {movies.map((movie) => (
+          {nowPlaying.map((movie) => (
             <div key={movie.id}>
               <MovieBanner movie={movie} />
             </div>
@@ -40,8 +62,9 @@ const HomePage = () => {
         </Slider>
       </div>
 
-      <MovieSection title="Popular" endpoint="3/tv/popular" movieType="tv" limit={10} />
-      <MovieSection title="Top Rated Movies" endpoint="/3/movie/top_rated" movieType="movie" limit={10} />
+      <MovieSection title="Popular" movies={popular} movieType="tv"  />
+      <MovieSection title="Top Rated Movies"  movies={topRated} movieType="movie"  />
+      <MovieSection title="Upcoming Movies" movies={upcoming} movieType="movie"  />
     </div>
   );
 };

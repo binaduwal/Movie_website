@@ -1,9 +1,9 @@
 export interface Movie {
-    id:number;
-    title:string;
-    bannerUrl:string;
-    overview:string;
-    poster_path:string;
+  id: number;
+  title: string;
+  bannerUrl: string;
+  overview: string;
+  poster_path: string;
 }
 
 export interface movieProps {
@@ -13,10 +13,8 @@ export interface movieProps {
 
 export interface MovieSectionProps {
   title: string;
-  endpoint: string;
-  limit?: number;
-    movieType?: "movie" | "tv";
-
+  movies: Movie[];
+  movieType?: "movie" | "tv";
 }
 
 export interface MovieDetail {
@@ -29,5 +27,3 @@ export interface MovieDetail {
   vote_average: number;
   genres: { id: number; name: string }[];
 }
-
-
