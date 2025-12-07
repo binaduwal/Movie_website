@@ -26,4 +26,9 @@ export interface MovieDetail {
   release_date: string;
   vote_average: number;
   genres: { id: number; name: string }[];
+  runtime: number;
+  production_companies: {
+    name: string;
+  }[];
+
 }
