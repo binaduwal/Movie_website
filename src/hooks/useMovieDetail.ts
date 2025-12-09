@@ -6,7 +6,7 @@ export function useMovieDetail(id:number,type:'movie' | 'tv'){
     return useQuery<MovieDetail,Error>({
         queryKey:[type,id],
         queryFn:async()=>{
-                  const { data } = await api.get<MovieDetail>(`3/${type}/${id}`, {
+                  const { data } = await api.get<MovieDetail>(`/${type}/${id}`, {
                     params: {
                       append_to_response: "videos",
                     },

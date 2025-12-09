@@ -30,5 +30,7 @@ export interface MovieDetail {
   production_companies: {
     name: string;
   }[];
+  first_air_date: string;
+  name: string;
 
 }
