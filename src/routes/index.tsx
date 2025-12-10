@@ -15,6 +15,7 @@ export default function AppRoutes() {
         <Route path="/top-rated" element={<TopRated />} />
         <Route path="/popular" element={<Popular />} />
         <Route path="/movie/:id" element={<MovieDetail />} />
+        <Route path="/tv/:id" element={<MovieDetail />} />
       </Route>
     </Routes>
   );

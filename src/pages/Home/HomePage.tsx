@@ -1,11 +1,11 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import MovieBanner from "../../components/movie/movieBanner";
 import MovieSection from "../../components/movie/MovieSection";
 import BannerSkeleton from "../../components/skeletons/BannerSkeleton";
 import MovieSectionSkeleton from "../../components/skeletons/MovieSectionSkeleton";
 import { useMovies } from "../../hooks/useMovies";
+import MovieBanner from "./movieBanner";
 const HomePage = () => {
 const {movies:nowPlaying,isLoading}=useMovies('/movie/now_playing')
 const {movies:popular}=useMovies('/movie/popular')
@@ -48,7 +48,7 @@ const {movies:topRatedSeries}=useMovies('/tv/top_rated')
         </Slider>
       </div>
 
-      <MovieSection title="Popular" movies={popular} movieType="movie" />
+      <MovieSection title="Popular Movies" movies={popular} movieType="movie" />
       <MovieSection
         title="Top Rated Movies"
         movies={topRatedMovie}

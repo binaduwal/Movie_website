@@ -5,6 +5,8 @@ import MovieSection from "../components/movie/MovieSection";
 import { useMovies } from "../hooks/useMovies";
 import MovieCardSkeleton from "../components/skeletons/MovieCardSkeleton";
 import MovieSectionSkeleton from "../components/skeletons/MovieSectionSkeleton";
+import { motion } from "framer-motion";
+import { useState } from "react";
 
 const IMAGE_BASE_URL = import.meta.env.VITE_IMAGE_URL;
 const FALLBACK_IMAGE =
@@ -12,18 +14,18 @@ const FALLBACK_IMAGE =
 
 const MovieDetail = () => {
   const { id } = useParams();
-  const location=useLocation()
+  const location = useLocation();
   const movieId = Number(id);
+  const [loaded, setLoaded] = useState(false);
   const type = location.pathname.startsWith("/tv") ? "tv" : "movie";
-  console.log(type,"type")
+  console.log(type, "type");
 
-  const { data: movie, isError,isLoading } = useMovieDetail(movieId, type);
+  const { data: movie, isError, isLoading } = useMovieDetail(movieId, type);
   console.log(movie, "movie detail");
 
   const similarProduct = `/${type}/${movieId}/similar`;
   const { movies: similarMovies } = useMovies(similarProduct);
   console.log(similarMovies, "similar movie");
-
   const posterpath = movie?.poster_path
     ? `${IMAGE_BASE_URL}${movie.poster_path}`
     : FALLBACK_IMAGE;
@@ -40,27 +42,30 @@ const MovieDetail = () => {
       </div>
     );
   }
-console.log("hello from movie detail")
-  if (isLoading || !movie)
-    {
+  console.log("hello from movie detail");
+  if (isLoading || !movie) {
     return (
-    <>
-    <MovieCardSkeleton/>
-    <MovieSectionSkeleton/>
-    </>
-    )
+      <>
+        <MovieCardSkeleton />
+        <MovieSectionSkeleton />
+      </>
+    );
   }
 
-  const title=movie?.title || movie?.name
-  const release_date=movie?.release_date || movie?.first_air_date
-  
+  const title = movie?.title || movie?.name;
+  const release_date = movie?.release_date || movie?.first_air_date;
+  const displayType = type === "tv" ? "TV Series" : "Movie";
 
   return (
     <div className="max-w-7xl mx-auto mb-12 ">
       <div className="w-full h-[400px]">
-        <img
+        <motion.img
           src={backdrop}
           alt={movie?.title}
+          onLoad={() => setLoaded(true)}
+          initial={{ scale: 1.1 }}
+          animate={{ scale: loaded ? 1 : 1.1 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
           className="
           w-full h-full object-cover "
         />
@@ -74,19 +79,21 @@ console.log("hello from movie detail")
             className="
           rounded-xl w-full object-cover max-h-[400px]"
           />
-          <Button className="w-full" variant="cyan" size="lg">
+          <Button className="w-full text-base" variant="cyan" size="lg">
             Trailer
           </Button>
         </div>
         <div className="flex-1 space-y-4">
-          <h2 className="text-3xl font-bold">{title }</h2>
+          <h2 className="text-3xl font-bold">{title}</h2>
           <p className="text-lg ">{movie?.overview}</p>
           <div className="grid grid-cols-2 gap-y-2 text-lg">
             <div>
               <span className="font-semibold">Genre: </span>
               <span>
-                {movie?.genres?.length ? movie.genres.map((genre) => genre.name).join(", ") : "N/A"}
-              </span> 
+                {movie?.genres?.length
+                  ? movie.genres.map((genre) => genre.name).join(", ")
+                  : "N/A"}
+              </span>
             </div>
             <div>
               <span className="font-semibold">Duration: </span>
@@ -98,17 +105,15 @@ console.log("hello from movie detail")
             </div>
             <div>
               <span className="font-semibold">Release Date: </span>
-              <span>
-                {release_date || "N/A"}
-              </span>
+              <span>{release_date || "N/A"}</span>
             </div>
           </div>
         </div>
         <div className="flex flex-col w-full lg:w-1/4 space-y-2 justify-start">
-          <Button className="z-10" variant="cyan" size="lg">
+          <Button className="z-10 text-base" variant="cyan" size="lg">
             Stream in HD
           </Button>
-          <Button className="z-10" variant="cyan" size="lg">
+          <Button className="z-10 text-base" variant="cyan" size="lg">
             Download in HD
           </Button>
         </div>
@@ -116,12 +121,12 @@ console.log("hello from movie detail")
       <div>
         {similarMovies.length > 0 ? (
           <MovieSection
-            title="Similar Movies"
+            title={`Similar ${displayType}`}
             movies={similarMovies}
             movieType={type}
           />
         ) : (
-          <div>No similar movies</div>
+          <div>No similar {type} found.</div>
         )}
       </div>
     </div>
