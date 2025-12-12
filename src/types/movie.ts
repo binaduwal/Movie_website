@@ -4,6 +4,9 @@ export interface Movie {
   bannerUrl: string;
   overview: string;
   poster_path: string;
+  backdrop_path:string;
+  name:string;
+  media_type: "movie" | "tv";
 }
 
 export interface movieProps {
