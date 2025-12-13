@@ -5,7 +5,7 @@ const Navbar = () => {
     <nav className="flex gap-5 text-lg">
       {
         navLinks.map((link) => (
-          <Link key={link.to} to={link.to} >
+          <Link key={link.to} to={link.to} className="hover:text-[#00acc1]" >
             {link.label}
           </Link>
         ))

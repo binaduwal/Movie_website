@@ -1,22 +1,29 @@
 import { Route, Routes } from "react-router-dom";
-import HomePage from "../pages/Home/HomePage";
+import { lazy, Suspense } from "react";
 import MainLayout from "../layouts/MainLayout";
-import Trending from "../pages/Trending";
-import TopRated from "../pages/TopRated";
-import Popular from "../pages/Popular";
-import MovieDetail from "../pages/MovieDetail";
+import PageLoader from "../components/PageLoader";
+
+const HomePage = lazy(() => import("../pages/Home/HomePage"));
+const Trending = lazy(() => import("../pages/Trending"));
+const TopRated = lazy(() => import("../pages/TopRated"));
+const Popular = lazy(() => import("../pages/Popular"));
+const MovieDetail = lazy(() => import("../pages/MovieDetail"));
+const NotFoundMoviePage = lazy(() => import("../404NotFound"));
 
 export default function AppRoutes() {
   return (
-    <Routes>
-      <Route element={<MainLayout />}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/trending" element={<Trending />} />
-        <Route path="/top-rated" element={<TopRated />} />
-        <Route path="/popular" element={<Popular />} />
-        <Route path="/movie/:id" element={<MovieDetail />} />
-        <Route path="/tv/:id" element={<MovieDetail />} />
-      </Route>
-    </Routes>
+    <Suspense fallback={<PageLoader />}>
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/trending" element={<Trending />} />
+          <Route path="/top-rated" element={<TopRated />} />
+          <Route path="/popular" element={<Popular />} />
+          <Route path="/movie/:id" element={<MovieDetail />} />
+          <Route path="/tv/:id" element={<MovieDetail />} />
+          <Route path="*" element={<NotFoundMoviePage />} />
+        </Route>
+      </Routes>
+    </Suspense>
   );
 }

@@ -19,7 +19,7 @@ const MovieBanner = ({ movie }: movieProps) => {
         transition={{duration:1.5,ease:"easeOut"}}
         className="object-cover inset-0 w-full h-full bg-black/50"
       />
-      <div className="absolute bottom-10 left-50 z-10 max-w-3xl space-y-2 p-6   ">
+      <div className="absolute bottom-10 left-62 z-10 max-w-3xl space-y-2 p-6   ">
         <h2 className="text-white text-5xl font-bold">{movie?.title}</h2>
         <p className="text-white text-2xl line-clamp-2">{movie?.overview}</p>
         <Button className="z-10 text-base" variant="cyan" size="lg">Watch Now</Button>
