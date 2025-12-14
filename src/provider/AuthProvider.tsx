@@ -9,16 +9,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
- useEffect(() => {
-  const storedUser = localStorage.getItem("user");
-  setTimeout(() => {
-    if (storedUser) setUser(JSON.parse(storedUser));
-    setLoading(false);
-  }, 0);
-}, []);
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    setTimeout(() => {
+      if (storedUser) setUser(JSON.parse(storedUser));
+      setLoading(false);
+    }, 0);
+  }, []);
 
-  const login = (email:string, _password:string) => {
-    const fakeUser = { email };
+  const login = (email: string, password: string) => {
+    const fakeUser = { email, password };
     localStorage.setItem("user", JSON.stringify(fakeUser));
     setUser(fakeUser);
   };
@@ -26,8 +26,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     localStorage.removeItem("user");
     setUser(null);
   };
-  const register = (email:string, password:string) => {
-    login(email, password);
+  const register = (email: string, password: string) => {
+    const user = { email, password };
+    localStorage.setItem("user", JSON.stringify(user));
+    setUser(user);
   };
 
   const value = {
