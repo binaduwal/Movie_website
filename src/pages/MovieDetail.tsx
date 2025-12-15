@@ -7,6 +7,8 @@ import MovieCardSkeleton from "../components/skeletons/MovieCardSkeleton";
 import MovieSectionSkeleton from "../components/skeletons/MovieSectionSkeleton";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { Heart } from "lucide-react";
+import { useWishListStore } from "../store/useWishListStore";
 
 const IMAGE_BASE_URL = import.meta.env.VITE_IMAGE_URL;
 const FALLBACK_IMAGE =
@@ -33,6 +35,8 @@ const MovieDetail = () => {
     ? `${IMAGE_BASE_URL}${movie.backdrop_path}`
     : FALLBACK_IMAGE;
 
+  const addToWishlist = useWishListStore((state) => state.addToWishList);
+  const wishListCount = useWishListStore((state) => state.wishList.length);
   console.log(backdrop, "backdrop");
   if (isError) {
     return (
@@ -51,6 +55,11 @@ const MovieDetail = () => {
       </>
     );
   }
+
+  const handleWishList = () => {
+    console.log("added to wishlist");
+    addToWishlist({ id: movieId, title: movie.title });
+  };
 
   const title = movie?.title || movie?.name;
   const release_date = movie?.release_date || movie?.first_air_date;
@@ -108,15 +117,20 @@ const MovieDetail = () => {
               <span>{release_date || "N/A"}</span>
             </div>
           </div>
+          <Button variant="secondary" onClick={handleWishList}>
+            Add to Wishlist
+            <Heart className="text-black" />
+          </Button>
         </div>
         <div className="flex flex-col w-full lg:w-1/4 space-y-2 justify-start">
-          <Button className="z-10 text-base" variant="cyan" size="lg">
+          <Button className="z-10 text-base" size="lg">
             Stream in HD
           </Button>
-          <Button className="z-10 text-base" variant="cyan" size="lg">
+          <Button className="z-10 text-base" size="lg">
             Download in HD
           </Button>
         </div>
+        <p>{wishListCount}</p>
       </div>
       <div>
         {similarMovies.length > 0 ? (
