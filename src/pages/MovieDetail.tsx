@@ -46,7 +46,6 @@ const MovieDetail = () => {
       </div>
     );
   }
-  console.log("hello from movie detail");
   if (isLoading || !movie) {
     return (
       <>
@@ -58,7 +57,7 @@ const MovieDetail = () => {
 
   const handleWishList = () => {
     console.log("added to wishlist");
-    addToWishlist({ id: movieId, title: movie.title });
+    addToWishlist({ id: movieId, title: movie.title, poster_path: movie.poster_path });
   };
 
   const title = movie?.title || movie?.name;

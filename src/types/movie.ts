@@ -1,17 +1,19 @@
 export interface Movie {
   id: number;
   title: string;
-  bannerUrl: string;
-  overview: string;
-  poster_path: string;
-  backdrop_path:string;
-  name:string;
-  media_type: "movie" | "tv";
+  bannerUrl?: string;
+  overview?: string;
+  poster_path?: string;
+  backdrop_path?:string;
+  name?:string;
+  media_type?: "movie" | "tv";
 }
 
 export interface movieProps {
   movie?: Movie;
   movieType?: "movie" | "tv";
+  showDelete?: boolean;
+  onDelete?: (id: number) => void;
 }
 
 export interface MovieSectionProps {

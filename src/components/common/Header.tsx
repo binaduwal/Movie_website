@@ -1,3 +1,4 @@
+import { Heart } from "lucide-react";
 import { AuthModal } from "../../auth/AuthModal";
 import Logo from "./Logo";
 import Navbar from "./Navbar";
@@ -12,6 +13,7 @@ const Header = () => {
       </div>
       <div className="flex items-center gap-4">
         <SearchBar />
+        <Heart />
         <AuthModal/>
       </div>
     </div>
