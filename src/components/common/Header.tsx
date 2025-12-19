@@ -1,12 +1,13 @@
-import { Heart } from "lucide-react";
 import { AuthModal } from "../../auth/AuthModal";
 import Logo from "./Logo";
 import Navbar from "./Navbar";
 import SearchBar from "./SearchBar";
-import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { useWishListStore } from "../../store/useWishListStore";
+import { WishListIcon } from "../WishListIcon";
 const Header = () => {
   const { isAuthenticated } = useAuth();
+  const wishlist=useWishListStore((state)=>state.wishList);
   return (
     <div className="flex  bg-gray-800 items-center justify-between px-6 py-3">
       <div className="flex items-center gap-10">
@@ -15,12 +16,9 @@ const Header = () => {
       </div>
       <div className="flex items-center gap-4">
         <SearchBar />
-        {
-          isAuthenticated &&
-          <Link to="/wishlist" className="text-white hover:text-red-500">
-          <Heart />
-          </Link>
-        }
+        {isAuthenticated && (
+          <WishListIcon count={wishlist.length} />
+        )}
         <AuthModal/>
       </div>
     </div>

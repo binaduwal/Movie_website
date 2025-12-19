@@ -17,7 +17,7 @@ export const AuthModal = () => {
         <Button onClick={() => setView("login")} variant="void">
           Login
         </Button>
-      ) : (
+      ) : ( 
         <Button onClick={logout} variant="void">
           Logout
         </Button>

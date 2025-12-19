@@ -10,6 +10,7 @@ import { useState } from "react";
 import { Heart } from "lucide-react";
 import { useWishListStore } from "../store/useWishListStore";
 import { useAuth } from "../context/AuthContext";
+import { toast } from "react-toastify";
 
 const IMAGE_BASE_URL = import.meta.env.VITE_IMAGE_URL;
 const FALLBACK_IMAGE =
@@ -48,8 +49,9 @@ const MovieDetail = () => {
     );
   }
 
-  const handleClick = () => {
+const handleClick = () => {
   if (!isAuthenticated) {
+    toast.info("Please log in to add movies to your wishlist");
     onOpenAuthModal();
     return;
   }
@@ -66,8 +68,9 @@ const MovieDetail = () => {
   }
 
   const handleWishList = () => {
-    console.log("added to wishlist");
+    
     addToWishlist({ id: movieId, title: movie.title, poster_path: movie.poster_path });
+    toast.success("Added to wishlist!");
   };
 
   const title = movie?.title || movie?.name;

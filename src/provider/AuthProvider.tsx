@@ -27,6 +27,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
   const logout = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("wishList");
     setUser(null);
   };
   const register = (email: string, password: string) => {

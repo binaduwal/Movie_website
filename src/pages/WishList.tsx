@@ -6,7 +6,7 @@ export const WishList = () => {
   const removeFromWishList = useWishListStore((state) => state.removeFromWishList);
   console.log(wishList, "wishlist");
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-7xl h-screen mx-auto px-4 py-8">
       {wishList.length > 0 ? (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
           {wishList.map((item) => (
