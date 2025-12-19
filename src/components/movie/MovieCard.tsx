@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import type { movieProps } from "../../types/movie";
 import { Card, CardContent } from "../ui/card";
 import { motion } from "framer-motion";
-import { X } from "lucide-react";
+import { Trash2 } from "lucide-react";
 
 const MovieCard = ({ movie, movieType,showDelete,onDelete }: movieProps) => {
   const poster = movie?.poster_path
@@ -13,10 +13,10 @@ const MovieCard = ({ movie, movieType,showDelete,onDelete }: movieProps) => {
     <motion.div whileHover={{ scale: 1.05,transition:{duration:0.3}}} className="relative" >
       {showDelete && onDelete && (
         <button
-          className="absolute top-2 right-2 z-10 bg-black bg-opacity-50 text-white p-1 rounded-full"
+          className="absolute top-2 right-2 z-10 bg-black/50 cursor-pointer text-white p-1 rounded-full"
           onClick={() => onDelete(movie!.id)}
         >
-          <X size={18} />
+          <Trash2 size={24} className="hover:text-red-500" />
         </button>
       )}
       <Link to={`/${movieType}/${movie?.id}`} className="cursor-pointer"

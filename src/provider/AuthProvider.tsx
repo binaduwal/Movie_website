@@ -8,6 +8,8 @@ export interface User {
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+    const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -21,6 +23,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const fakeUser = { email, password };
     localStorage.setItem("user", JSON.stringify(fakeUser));
     setUser(fakeUser);
+    setIsAuthModalOpen(false);
   };
   const logout = () => {
     localStorage.removeItem("user");
@@ -30,6 +33,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const user = { email, password };
     localStorage.setItem("user", JSON.stringify(user));
     setUser(user);
+    setIsAuthModalOpen(false);
   };
 
   const value = {
@@ -39,6 +43,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     register,
     isAuthenticated: !!user,
     loading,
-  };
+ isAuthModalOpen,
+    onOpenAuthModal: () => setIsAuthModalOpen(true),
+    onCloseAuthModal: () => setIsAuthModalOpen(false),  };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

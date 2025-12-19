@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { Heart } from "lucide-react";
 import { useWishListStore } from "../store/useWishListStore";
+import { useAuth } from "../context/AuthContext";
 
 const IMAGE_BASE_URL = import.meta.env.VITE_IMAGE_URL;
 const FALLBACK_IMAGE =
@@ -36,7 +37,7 @@ const MovieDetail = () => {
     : FALLBACK_IMAGE;
 
   const addToWishlist = useWishListStore((state) => state.addToWishList);
-  const wishListCount = useWishListStore((state) => state.wishList.length);
+  const {isAuthenticated,onOpenAuthModal} = useAuth();
   console.log(backdrop, "backdrop");
   if (isError) {
     return (
@@ -46,6 +47,15 @@ const MovieDetail = () => {
       </div>
     );
   }
+
+  const handleClick = () => {
+  if (!isAuthenticated) {
+    onOpenAuthModal();
+    return;
+  }
+
+  handleWishList();
+};
   if (isLoading || !movie) {
     return (
       <>
@@ -116,7 +126,8 @@ const MovieDetail = () => {
               <span>{release_date || "N/A"}</span>
             </div>
           </div>
-          <Button variant="secondary" onClick={handleWishList}>
+
+          <Button variant="secondary" onClick={handleClick}>
             Add to Wishlist
             <Heart className="text-black" />
           </Button>
@@ -129,7 +140,6 @@ const MovieDetail = () => {
             Download in HD
           </Button>
         </div>
-        <p>{wishListCount}</p>
       </div>
       <div>
         {similarMovies.length > 0 ? (
