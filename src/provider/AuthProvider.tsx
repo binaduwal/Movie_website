@@ -8,7 +8,7 @@ export interface User {
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-    const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authModalView, setAuthModalView] = useState<"login" | "register" | null>(null);
 
 
   useEffect(() => {
@@ -23,18 +23,18 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const fakeUser = { email, password };
     localStorage.setItem("user", JSON.stringify(fakeUser));
     setUser(fakeUser);
-    setIsAuthModalOpen(false);
+    setAuthModalView(null);
   };
   const logout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("wishList");
     setUser(null);
+    setAuthModalView(null);
   };
   const register = (email: string, password: string) => {
     const user = { email, password };
     localStorage.setItem("user", JSON.stringify(user));
     setUser(user);
-    setIsAuthModalOpen(false);
   };
 
   const value = {
@@ -44,8 +44,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     register,
     isAuthenticated: !!user,
     loading,
- isAuthModalOpen,
-    onOpenAuthModal: () => setIsAuthModalOpen(true),
-    onCloseAuthModal: () => setIsAuthModalOpen(false),  };
+    authModalView,
+    openLogin: () => setAuthModalView("login"),
+    openRegister: () => setAuthModalView("register"),
+    closeAuthModal: () => setAuthModalView(null),
+
+   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

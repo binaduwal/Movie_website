@@ -1,20 +1,18 @@
 import { UserRound } from "lucide-react";
-import { useState } from "react";
 import { Button } from "../components/ui/button";
 import { LoginModal } from "./LoginModal";
 import { RegisterModal } from "./RegisterModal";
 import { useAuth } from "../context/AuthContext";
 
 export const AuthModal = () => {
-  const [view, setView] = useState<"login" | "register" | null>(null);
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, logout,authModalView,openLogin,openRegister,closeAuthModal } = useAuth();
 
   return (
     <div className="flex gap-2">
       <UserRound size={22} />
       
        {!isAuthenticated ? (
-        <Button onClick={() => setView("login")} variant="void">
+        <Button onClick={openLogin} variant="void">
           Login
         </Button>
       ) : ( 
@@ -22,16 +20,18 @@ export const AuthModal = () => {
           Logout
         </Button>
       )}
-      {view === "login" && (
+
+     
+      {authModalView === "login" && (
         <LoginModal
-          onClose={() => setView(null)}
-          onOpenRegister={() => setView("register")}
+          onClose={closeAuthModal}
+          onOpenRegister={openRegister}
         />
       )}
-      {view === "register" && (
+      {authModalView === "register" && (
         <RegisterModal
-          onClose={() => setView(null)}
-          onOpenLogin={() => setView("login")}
+          onClose={closeAuthModal}
+          onOpenLogin={openLogin}
         />
       )}
     </div>

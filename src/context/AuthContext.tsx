@@ -7,9 +7,12 @@ interface AuthContextType {
   register: (email: string, password: string) => void;
   loading?: boolean;
   isAuthenticated?: boolean;
-  isAuthModalOpen: boolean;
-  onOpenAuthModal: () => void;
-  onCloseAuthModal: () => void;
+  authModalView?: "login" | "register";
+  openLogin: () => void;
+  openRegister: () => void;
+  closeAuthModal: () => void;
+
+  
 }
 
 export const AuthContext = createContext<AuthContextType | null>(null);

@@ -38,7 +38,7 @@ const MovieDetail = () => {
     : FALLBACK_IMAGE;
 
   const addToWishlist = useWishListStore((state) => state.addToWishList);
-  const {isAuthenticated,onOpenAuthModal} = useAuth();
+  const {isAuthenticated,openLogin} = useAuth();
   console.log(backdrop, "backdrop");
   if (isError) {
     return (
@@ -52,7 +52,7 @@ const MovieDetail = () => {
 const handleClick = () => {
   if (!isAuthenticated) {
     toast.info("Please log in to add movies to your wishlist");
-    onOpenAuthModal();
+    openLogin();
     return;
   }
 
@@ -155,6 +155,7 @@ const handleClick = () => {
           <div>No similar {type} found.</div>
         )}
       </div>
+   
     </div>
   );
 };
