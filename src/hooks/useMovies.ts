@@ -12,7 +12,7 @@ export function useMovies(endpoint: string, limit?: number) {
       try {
         setIsLoading(true);
         const response = await api.get(endpoint);
-        setMovies(response.data.results.slice(0, limit));
+        setMovies(response.data.results?.slice(0, limit));
       } catch (error) {
         console.error("Failed to fetch movies", error);
         setIsError(true);

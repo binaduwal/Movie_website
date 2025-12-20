@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { useWishListStore } from "../store/useWishListStore";
 
 export interface User {
   email: string;
@@ -10,7 +11,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(true);
   const [authModalView, setAuthModalView] = useState<"login" | "register" | null>(null);
 
-
+  const {wishList}=useWishListStore();
+  console.log("Wishlist in AuthProvider:", wishList);
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     setTimeout(() => {
@@ -30,6 +32,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     localStorage.removeItem("wishList");
     setUser(null);
     setAuthModalView(null);
+    wishList?.splice(0, wishList.length); 
   };
   const register = (email: string, password: string) => {
     const user = { email, password };
