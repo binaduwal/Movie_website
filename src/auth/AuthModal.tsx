@@ -8,7 +8,7 @@ export const AuthModal = () => {
   const { isAuthenticated, logout,authModalView,openLogin,openRegister,closeAuthModal } = useAuth();
 
   return (
-    <div className="flex gap-2">
+    <div className="flex items-center gap-1">
       <UserRound size={22} />
       
        {!isAuthenticated ? (

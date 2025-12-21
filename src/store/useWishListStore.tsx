@@ -13,7 +13,7 @@ type WishListState = {
 };
 
 export const useWishListStore = create<WishListState>()(
-  persist((set, get) =>
+  persist((set) =>
      ({
   wishList: [],
 
