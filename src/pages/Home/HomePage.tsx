@@ -8,9 +8,9 @@ import { useMovies } from "../../hooks/useMovies";
 import MovieBanner from "./movieBanner";
 const HomePage = () => {
 const {movies:nowPlaying,isLoading}=useMovies('/movie/now_playing')
-const {movies:popular}=useMovies('/movie/popular',10)
-const {movies:topRatedMovie}=useMovies('/movie/top_rated',10)
-const {movies:topRatedSeries}=useMovies('/tv/top_rated',10)
+const {movies:popular}=useMovies('/movie/popular')
+const {movies:topRatedMovie}=useMovies('/movie/top_rated')
+const {movies:topRatedSeries}=useMovies('/tv/top_rated')
 
 
   const settings = {
