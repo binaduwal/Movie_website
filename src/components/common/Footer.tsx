@@ -5,15 +5,15 @@ const Footer = () => {
   return (
     <footer className="p-3 text-lg bg-gray-800">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8">
-        <div className="space-y-3">
+        <div className="flex gap-2">
           <Logo />
-          <p className="leading-relaxed text-gray-300">
+          <span className="leading-relaxed text-gray-300">
             MovieApp - Free movies online, here you can watch movies online in
             high quality for free without annoying of advertising, just come and
             enjoy your movies online. fmovie, fmovies, bmovies Disclaimer: This
             site does not store any files on its server. All contents are
             provided by non-affiliated third parties.
-          </p>
+          </span>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 ">
           {footer.map((item) => (

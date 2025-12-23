@@ -8,7 +8,7 @@ const Trending = () => {
     setPage,
     totalPages,
     isLoading,
-  } = useMovies("/movie/popular", {
+  } = useMovies("/trending/all/day", {
     infinite: true,
   });
 
