@@ -100,7 +100,7 @@ const handleClick = () => {
             className="
           rounded-xl w-full object-cover max-h-[400px]"
           />
-          <Button className="w-full text-base" variant="cyan" size="lg">
+          <Button className="w-full text-base text-white" size="lg">
             Trailer
           </Button>
         </div>

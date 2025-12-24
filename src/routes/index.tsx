@@ -8,7 +8,6 @@ import { ProtectedRoute } from "./ProtectedRoute";
 const HomePage = lazy(() => import("../pages/Home/HomePage"));
 const Trending = lazy(() => import("../pages/Trending"));
 const TopRated = lazy(() => import("../pages/TopRated"));
-const Popular = lazy(() => import("../pages/Popular"));
 const MovieDetail = lazy(() => import("../pages/MovieDetail"));
 const NotFoundMoviePage = lazy(() => import("../404NotFound"));
 
@@ -20,7 +19,6 @@ export default function AppRoutes() {
           <Route path="/" element={<HomePage />} />
           <Route path="/trending" element={<Trending />} />
           <Route path="/top-rated" element={<TopRated />} />
-          <Route path="/popular" element={<Popular />} />
           <Route path="/movie/:id" element={<MovieDetail />} />
           <Route path="/tv/:id" element={<MovieDetail />} />
           <Route element={<ProtectedRoute />}>

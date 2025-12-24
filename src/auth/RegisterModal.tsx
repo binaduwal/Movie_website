@@ -37,7 +37,7 @@ export const RegisterModal = ({ onClose, onOpenLogin }: RegisterModalProps) => {
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute right-3 top-3 rounded-full p-2 hover:bg-cyan-500 hover:text-white"
+          className="absolute right-3 top-3 rounded-full p-2 hover:text-white"
         >
           <X size={18} />
         </button>
@@ -92,7 +92,7 @@ export const RegisterModal = ({ onClose, onOpenLogin }: RegisterModalProps) => {
               />
             </div>
 
-            <Button type="submit" variant="cyan" size="lg" className="w-full">
+            <Button type="submit" size="lg" className="w-full">
               Register
             </Button>
           </form>
@@ -102,7 +102,7 @@ export const RegisterModal = ({ onClose, onOpenLogin }: RegisterModalProps) => {
           <Button
             onClick={onOpenLogin}
             variant="void"
-            className="ml-1 text-cyan-600 hover:underline"
+            className="ml-1 hover:underline"
           >
             Login
           </Button>

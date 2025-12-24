@@ -18,7 +18,7 @@ const Footer = () => {
         <div className="grid grid-cols-2 sm:grid-cols-3 ">
           {footer.map((item) => (
             <div key={item.title}>
-              <h3 className="font-semibold mb-2 uppercase text-[#00acc1]">{item.title}</h3>
+              <h3 className="font-semibold mb-2 uppercase text-primary">{item.title}</h3>
               <div className="flex flex-col gap-1">
                 {item.links.map((link) => (
                   <Link key={link.name} to={link.href} className="hover:underline">{link.name}</Link>

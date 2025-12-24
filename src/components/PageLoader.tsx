@@ -24,9 +24,9 @@ export default function PageLoader() {
 
       <div className="relative z-10 flex items-center justify-center">
         <img
-          src=""
+          src="/logo.png"
           alt="MovieApp Logo"
-          className="w-auto h-30"
+          className="w-auto h-48"
           style={{ maxWidth: '176px' }}
         />
       </div>

@@ -22,7 +22,7 @@ const MovieBanner = ({ movie }: movieProps) => {
       <div className="absolute bottom-10 left-62 z-10 max-w-3xl space-y-2 p-6   ">
         <h2 className="text-white text-5xl font-bold">{movie?.title}</h2>
         <p className="text-white text-2xl line-clamp-2">{movie?.overview}</p>
-        <Button className="z-10 text-base" variant="cyan" size="lg">Watch Now</Button>
+        <Button className="z-10 text-base text-white" size="lg">Watch Now</Button>
       </div>
     </div>
   );

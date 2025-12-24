@@ -49,7 +49,7 @@ export const LoginModal = ({ onClose, onOpenRegister }: LoginModalProps) => {
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute right-3 top-3 rounded-full p-2 hover:bg-cyan-500 hover:text-white"
+          className="absolute right-3 top-3 rounded-full p-2 hover-bg-primary hover:text-white"
         >
           <X size={18} />
         </button>
@@ -92,12 +92,12 @@ export const LoginModal = ({ onClose, onOpenRegister }: LoginModalProps) => {
                 <input type="checkbox" />
                 Remember me
               </label>
-              <button type="button" className="text-cyan-600 hover:underline">
+              <button type="button" className="text-primary hover:underline">
                 Forgot password?
               </button>
-            </div>
+            </div> 
 
-            <Button type="submit" variant="cyan" size="lg" className="w-full">
+            <Button type="submit" size="lg" className="w-full">
               Login
             </Button>
           </form>
@@ -108,7 +108,7 @@ export const LoginModal = ({ onClose, onOpenRegister }: LoginModalProps) => {
           <Button
             onClick={onOpenRegister}
             variant="void"
-            className="ml-1 text-cyan-600 hover:underline"
+            className="ml-1 hover:underline"
           >
             Register
           </Button>
