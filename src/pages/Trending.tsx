@@ -11,7 +11,7 @@ const Trending = () => {
   } = useMovies("/trending/all/day", {
     infinite: true,
   });
-
+console.log(movies, "trending movies");
   const loaderRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const Trending = () => {
 
   return (
     <div>
-      <MovieSection title="Trending Now" movies={movies} />
+      <MovieSection title="Trending Now" movies={movies}  />
       {isLoading && <p>Loading...</p>}
       <div ref={loaderRef} />
     </div>

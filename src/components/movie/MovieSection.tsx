@@ -8,7 +8,7 @@ const MovieSection = ({title,movies,movieType}:MovieSectionProps) => {
       <SectionTitle>{title}</SectionTitle>
       <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
           {movies.map((movie) => (
-            <MovieCard key={movie.id} movie={movie} movieType={movieType}/>
+            <MovieCard key={movie.id} movie={movie} movieType={movieType  ?? movie.media_type} />
           ))}
         </div>
     </div>
