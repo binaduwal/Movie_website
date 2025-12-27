@@ -30,7 +30,7 @@ const SearchBar = () => {
             value={searchTerm}
             placeholder="Search..."
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="bg-white w-[300px] focus:outline-none text-black rounded-full pl-10 py-2"
+            className="bg-white sm:w-[300px] focus:outline-none text-black rounded-full pl-10 py-2"
           />
           {searchTerm && (
             <X

@@ -34,12 +34,11 @@ export const RegisterModal = ({ onClose, onOpenLogin }: RegisterModalProps) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
       <Card className="relative w-[420px] rounded-3xl p-6">
-        {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute right-3 top-3 rounded-full p-2 hover:text-white"
+          className="absolute right-3 top-3 rounded-full p-2 hover:text-white hover-bg-primary cursor-pointer"
         >
-          <X size={18} />
+          <X size={18}/>
         </button>
 
         <CardHeader className="text-center">
@@ -102,7 +101,7 @@ export const RegisterModal = ({ onClose, onOpenLogin }: RegisterModalProps) => {
           <Button
             onClick={onOpenLogin}
             variant="void"
-            className="ml-1 hover:underline"
+            className="ml-1 hover:underline text-primary cursor-pointer"
           >
             Login
           </Button>

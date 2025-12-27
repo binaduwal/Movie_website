@@ -5,34 +5,33 @@ import { RegisterModal } from "./RegisterModal";
 import { useAuth } from "../context/AuthContext";
 
 export const AuthModal = () => {
-  const { isAuthenticated, logout,authModalView,openLogin,openRegister,closeAuthModal } = useAuth();
+  const {
+    isAuthenticated,
+    logout,
+    authModalView,
+    openLogin,
+    openRegister,
+    closeAuthModal,
+  } = useAuth();
 
   return (
     <div className="flex items-center gap-1">
-      <UserRound size={22} />
-      
-       {!isAuthenticated ? (
+      <UserRound size={22} onClick={openLogin} className="cursor-pointer" />
+      {!isAuthenticated ? (
         <Button onClick={openLogin} variant="void">
           Login
         </Button>
-      ) : ( 
+      ) : (
         <Button onClick={logout} variant="void">
           Logout
         </Button>
       )}
 
-     
       {authModalView === "login" && (
-        <LoginModal
-          onClose={closeAuthModal}
-          onOpenRegister={openRegister}
-        />
+        <LoginModal onClose={closeAuthModal} onOpenRegister={openRegister} />
       )}
       {authModalView === "register" && (
-        <RegisterModal
-          onClose={closeAuthModal}
-          onOpenLogin={openLogin}
-        />
+        <RegisterModal onClose={closeAuthModal} onOpenLogin={openLogin} />
       )}
     </div>
   );
