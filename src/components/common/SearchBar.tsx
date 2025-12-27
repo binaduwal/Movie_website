@@ -17,8 +17,9 @@ const SearchBar = () => {
   const { movies: data = [] } = useMovies(
     debounceSearchTerm ? `/search/multi?query=${debounceSearchTerm}` : ""
   );
+  console.log(searchTerm,"searchterm")
+  console.log(data,"data")
 
-  console.log(data, "hello");
   return (
     <div className="relative">
       <form>

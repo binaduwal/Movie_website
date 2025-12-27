@@ -5,8 +5,8 @@ import { api } from "../api/axiosClient";
 export function useMovies(
   endpoint: string,
   options?: {
-    limit?: number;     
-    infinite?: boolean; 
+    limit?: number;
+    infinite?: boolean;
   }
 ) {
   const { limit, infinite = false } = options || {};
@@ -23,7 +23,11 @@ export function useMovies(
         setIsLoading(true);
         setIsError(false);
 
-        const response = await api.get(`${endpoint}?page=${page}`);
+        const response = await api.get(endpoint, {
+          params: {
+            page,
+          },
+        });
         const results: Movie[] = response.data.results || [];
 
         setTotalPages(response.data.total_pages);
