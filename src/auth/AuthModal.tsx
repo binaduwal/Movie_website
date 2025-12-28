@@ -18,11 +18,11 @@ export const AuthModal = () => {
     <div className="flex items-center gap-1">
       <UserRound size={22} onClick={openLogin} className="cursor-pointer" />
       {!isAuthenticated ? (
-        <Button onClick={openLogin} variant="void">
+        <Button onClick={openLogin} variant="void" className="hidden sm:block cursor-pointer">
           Login
         </Button>
       ) : (
-        <Button onClick={logout} variant="void">
+        <Button onClick={logout} variant="void" className="hidden sm:block cursor-pointer">
           Logout
         </Button>
       )}

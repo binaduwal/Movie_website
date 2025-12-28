@@ -15,7 +15,7 @@ const Footer = () => {
             provided by non-affiliated third parties.
           </span>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 ">
+        <div className="flex justify-between">
           {footer.map((item) => (
             <div key={item.title}>
               <h3 className="font-semibold mb-2 uppercase text-primary">{item.title}</h3>

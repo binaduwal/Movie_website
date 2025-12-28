@@ -17,20 +17,18 @@ const SearchBar = () => {
   const { movies: data = [] } = useMovies(
     debounceSearchTerm ? `/search/multi?query=${debounceSearchTerm}` : ""
   );
-  console.log(searchTerm,"searchterm")
-  console.log(data,"data")
 
   return (
     <div className="relative">
       <form>
-        <div className="relative ">
+        <div className="relative  ">
           <Search className="absolute left-3 top-2 text-gray-400 " />
           <input
             type="text"
             value={searchTerm}
             placeholder="Search..."
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="bg-white sm:w-[300px] focus:outline-none text-black rounded-full pl-10 py-2"
+            className="bg-white  sm:block sm:w-[300px] focus:outline-none text-black rounded-full pl-10 py-2"
           />
           {searchTerm && (
             <X
