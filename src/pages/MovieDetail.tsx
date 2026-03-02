@@ -69,7 +69,7 @@ const handleClick = () => {
 
   const handleWishList = () => {
     
-    addToWishlist({ id: movieId, title: movie.title, poster_path: movie.poster_path });
+    addToWishlist({ id: movieId, title: movie.title, poster_path: movie?.poster_path });
     toast.success("Added to wishlist!");
   };
 

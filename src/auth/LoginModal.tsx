@@ -23,25 +23,36 @@ export const LoginModal = ({ onClose, onOpenRegister }: LoginModalProps) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    const storedUser = localStorage.getItem("user");
+  const SUPER_ADMIN = {
+  email: "superadmin@example.com",
+  password: "Super@123",
+  role: "superadmin",
+};
+ const handleLogin = (e: React.FormEvent) => {
+  e.preventDefault();
+  setError("");
 
-    if (!storedUser) {
-      setError("No account found. Please register first.");
-      return;
-    }
+  if (
+    email === SUPER_ADMIN.email &&
+    password === SUPER_ADMIN.password
+  ) {
+    login(email, password);
 
-    const user = JSON.parse(storedUser);
-    if (user.email === email && user.password === password) {
-      login(email, password);
-      toast.success("Login successful");
-      onClose();
-    } else {
-      setError("Invalid email or password");
-    }
-    console.log(email, password);
-  };
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        email: SUPER_ADMIN.email,
+        role: SUPER_ADMIN.role,
+      })
+    );
+
+    toast.success("Super Admin Login Successful");
+    onClose();
+    return;
+  }
+
+  setError("Invalid email or password");
+};
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
