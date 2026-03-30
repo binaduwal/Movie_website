@@ -80,15 +80,11 @@ const handleClick = () => {
   return (
     <div className="max-w-7xl mx-auto mb-12 ">
       <div className="w-full h-[400px]">
-        <motion.img
+        <img
           src={backdrop}
           alt={movie?.title}
           onLoad={() => setLoaded(true)}
-          initial={{ scale: 1.1 }}
-          animate={{ scale: loaded ? 1 : 1.1 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-          className="
-          w-full h-full object-cover "
+          className="w-full h-full object-cover "
         />
       </div>
 
@@ -146,11 +142,15 @@ const handleClick = () => {
       </div>
       <div>
         {similarMovies.length > 0 ? (
+          <div className="mt-5">
+
           <MovieSection
             title={`Similar ${displayType}`}
             movies={similarMovies}
             movieType={type}
           />
+                    </div>
+
         ) : (
           <div>No similar {type} found.</div>
         )}

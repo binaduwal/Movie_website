@@ -17,7 +17,7 @@ const MovieBanner = ({ movie }: movieProps) => {
         initial={{scale:1.1}}
         animate={{scale:loaded ? 1 : 1.1}}
         transition={{duration:1.5,ease:"easeOut"}}
-        className="object-cover inset-0 w-full h-full bg-black/50"
+        className="object-cover object-top inset-0 w-full h-full bg-black/50"
       />
       <div className="absolute bottom-6 left-0 right-0 sm:left-20 z-10 max-w-3xl space-y-2 px-4 sm:px-12  ">
         <h2 className="text-white text-2xl sm:text-5xl font-bold">{movie?.title}</h2>
