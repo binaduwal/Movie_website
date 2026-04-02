@@ -38,7 +38,7 @@ const MovieDetail = () => {
     : FALLBACK_IMAGE;
 
   const addToWishlist = useWishListStore((state) => state.addToWishList);
-  const {isAuthenticated,openLogin} = useAuth();
+  const { isAuthenticated, openLogin } = useAuth();
   console.log(backdrop, "backdrop");
   if (isError) {
     return (
@@ -49,15 +49,15 @@ const MovieDetail = () => {
     );
   }
 
-const handleClick = () => {
-  if (!isAuthenticated) {
-    toast.info("Please log in to add movies to your wishlist");
-    openLogin();
-    return;
-  }
+  const handleClick = () => {
+    if (!isAuthenticated) {
+      toast.info("Please log in to add movies to your wishlist");
+      openLogin();
+      return;
+    }
 
-  handleWishList();
-};
+    handleWishList();
+  };
   if (isLoading || !movie) {
     return (
       <>
@@ -68,7 +68,7 @@ const handleClick = () => {
   }
 
   const handleWishList = () => {
-    
+
     addToWishlist({ id: movieId, title: movie.title, poster_path: movie?.poster_path });
     toast.success("Added to wishlist!");
   };
@@ -79,12 +79,12 @@ const handleClick = () => {
 
   return (
     <div className="max-w-7xl mx-auto mb-12 ">
-      <div className="w-full h-[400px]">
+      <div className="w-full h-[500px]">
         <img
           src={backdrop}
           alt={movie?.title}
           onLoad={() => setLoaded(true)}
-          className="w-full h-full object-cover "
+          className="w-full h-full object-cover"
         />
       </div>
 
@@ -144,18 +144,18 @@ const handleClick = () => {
         {similarMovies.length > 0 ? (
           <div className="mt-5">
 
-          <MovieSection
-            title={`Similar ${displayType}`}
-            movies={similarMovies}
-            movieType={type}
-          />
-                    </div>
+            <MovieSection
+              title={`Similar ${displayType}`}
+              movies={similarMovies}
+              movieType={type}
+            />
+          </div>
 
         ) : (
           <div>No similar {type} found.</div>
         )}
       </div>
-   
+
     </div>
   );
 };

@@ -21,12 +21,12 @@ const MovieCard = ({ movie, movieType,showDelete,onDelete }: movieProps) => {
       )}
       <Link to={`/${movieType}/${movie?.id}`} className="cursor-pointer"
 >
-        <Card className="p-0 border-none focus:outline-none bg-black">
-          <CardContent className="p-0">
+        <Card className="p-0 border-none focus:outline-none bg-black ">
+          <CardContent className="p-0 h-80">
             <img
               src={poster}
               alt={movie?.title}
-              className="w-full  object-cover rounded-lg"
+              className="w-full h-full object-cover rounded-lg"
             />
           </CardContent>
         </Card>
