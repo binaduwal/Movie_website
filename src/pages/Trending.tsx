@@ -39,7 +39,7 @@ console.log(movies, "trending movies");
   }, [isLoading, totalPages, setPage]);
 
   return (
-    <div>
+    <div className="mt-18">
       <MovieSection title="Trending Now" movies={movies}  />
       {isLoading && <p>Loading...</p>}
       <div ref={loaderRef} />

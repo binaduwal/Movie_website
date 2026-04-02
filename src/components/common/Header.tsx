@@ -10,8 +10,8 @@ const Header = () => {
   const { isAuthenticated } = useAuth();
   const wishlist = useWishListStore((state) => state.wishList);
   return (
-    <div className="flex  bg-gray-800 items-center justify-between px-6 h-16">
-      <div className="flex items-center gap-10">
+    <div className="flex fixed bg-gray-800 items-center justify-between px-6 h-16 z-50 w-full">
+      <div className="flex items-center gap-10 ">
         <MobileMenu />
         <Logo />
         <Navbar />
