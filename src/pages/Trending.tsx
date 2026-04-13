@@ -11,7 +11,7 @@ const Trending = () => {
   } = useMovies("/trending/all/day", {
     infinite: true,
   });
-console.log(movies, "trending movies");
+  console.log(movies, "trending movies");
   const loaderRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -40,8 +40,10 @@ console.log(movies, "trending movies");
 
   return (
     <div className="mt-18">
-      <MovieSection title="Trending Now" movies={movies}  />
-      {isLoading && <p>Loading...</p>}
+      <MovieSection title="Trending Now" movies={movies} />
+      {isLoading && <div className="flex justify-center py-4">
+        <div className="w-6 h-6 border-4 border-white-500 border-t-transparent rounded-full animate-spin "></div>
+      </div>}
       <div ref={loaderRef} />
     </div>
   );

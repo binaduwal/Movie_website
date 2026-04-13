@@ -6,11 +6,12 @@ import BannerSkeleton from "../../components/skeletons/BannerSkeleton";
 import MovieSectionSkeleton from "../../components/skeletons/MovieSectionSkeleton";
 import { useMovies } from "../../hooks/useMovies";
 import MovieBanner from "./movieBanner";
+import VideoLayout from "../../components/youtube/VideoLayout";
 const HomePage = () => {
-const {movies:nowPlaying,isLoading}=useMovies('/movie/now_playing')
-const {movies:popular}=useMovies('/movie/popular')
-const {movies:topRatedMovie}=useMovies('/movie/top_rated')
-const {movies:topRatedSeries}=useMovies('/tv/top_rated')
+const {movies:nowPlaying,isLoading}=useMovies('/movie/now_playing',{limit:10})
+const {movies:popular}=useMovies('/movie/popular',{limit:10})
+const {movies:topRatedMovie}=useMovies('/movie/top_rated',{limit:10})
+const {movies:topRatedSeries}=useMovies('/tv/top_rated',{limit:10})
 
 
   const settings = {
@@ -49,6 +50,7 @@ const {movies:topRatedSeries}=useMovies('/tv/top_rated')
       </div>
 
       <MovieSection title="Popular Movies" movies={popular} movieType="movie" />
+      <VideoLayout/>
       <MovieSection
         title="Top Rated Movies"
         movies={topRatedMovie}
