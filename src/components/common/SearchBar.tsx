@@ -1,60 +1,112 @@
 import { Search, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useMovies } from "../../hooks/useMovies";
 import { useDebounce } from "../../hooks/useDebounceHook";
 import { Link } from "react-router-dom";
 
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const debounceSearchTerm = useDebounce(searchTerm, 300);
-  const handleDelete = () => {
-    setSearchTerm("");
-  };
-  const IMAGE_BASE_URL = import.meta.env.VITE_IMAGE_URL;
+
+  const IMAGE_BASE_URL = import.meta.env.VITE_IMAGE_BASE_URL;
+
   const FALLBACK_IMAGE =
     "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg";
 
   const { movies: data = [] } = useMovies(
-    debounceSearchTerm ? `/search/multi?query=${debounceSearchTerm}` : ""
+    debounceSearchTerm ? `/search/multi?query=${debounceSearchTerm}` : "",
   );
+
+  useEffect(() => {
+    if (isOpen) {
+      inputRef.current?.focus();
+    }
+  }, [isOpen]);
+
+  const handleClose = () => {
+    setSearchTerm("");
+    setIsOpen(false);
+  };
 
   return (
     <div className="relative">
-      <form>
-        <div className="relative  ">
-          <Search className="absolute left-3 top-2 text-gray-400 " />
-          <input
-            type="text"
-            value={searchTerm}
-            placeholder="Search..."
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="bg-white  sm:block sm:w-[300px] focus:outline-none text-black rounded-full pl-10 py-2"
+      {/* Search Container */}
+      <div
+        className={`
+        flex items-center overflow-hidden
+        transition-all duration-300 ease-in-out
+        h-11 rounded-full border
+        ${
+          isOpen
+            ? "w-[300px] px-4 bg-white/10 backdrop-blur-md border-white/10"
+            : "w-11 px-0 justify-center bg-transparent border-transparent"
+        }
+`}
+      >
+        <Search
+          className="text-gray-300 cursor-pointer shrink-0"
+          size={20}
+          onClick={() => setIsOpen(true)}
+        />
+
+        <input
+          ref={inputRef}
+          type="text"
+          value={searchTerm}
+          placeholder="Search movies..."
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className={`
+            bg-transparent outline-none text-white placeholder:text-gray-400
+            transition-all duration-300
+            ml-3 w-full
+          ${isOpen ? "opacity-100 ml-3" : "opacity-0 w-0 ml-0"}          `}
+        />
+
+        {isOpen && (
+          <X
+            onClick={handleClose}
+            className="text-gray-400 cursor-pointer hover:text-white transition"
+            size={18}
           />
-          {searchTerm && (
-            <X
-              onClick={handleDelete}
-              className="absolute right-3 top-2 text-gray-400 cursor-pointer"
-            />
-          )}
-        </div>
-      </form>
+        )}
+      </div>
+
+      {/* Search Results */}
       {debounceSearchTerm && data.length > 0 && (
-        <div className="absolute top-full right-0 w-[300px] max-h-80 bg-white text-gray-800 overflow-y-auto z-50 border rounded-lg shadow-lg mt-2">
+        <div className="absolute top-14 right-0 w-[320px] max-h-[400px] overflow-y-auto rounded-2xl bg-gray-900/95 backdrop-blur-lg border border-white/10 shadow-2xl p-2 z-50">
           {data.map((movie) => {
             const image = movie?.poster_path
               ? `${IMAGE_BASE_URL}${movie.poster_path}`
               : movie?.backdrop_path
-              ? `${IMAGE_BASE_URL}${movie.backdrop_path}`
-              : FALLBACK_IMAGE;
+                ? `${IMAGE_BASE_URL}${movie.backdrop_path}`
+                : FALLBACK_IMAGE;
 
             return (
-              <Link to={`/${movie.media_type}/${movie.id}`} key={movie.id} className="flex gap-2 p-2">
+              <Link
+                key={movie.id}
+                to={`/${movie.media_type}/${movie.id}`}
+                onClick={() => setSearchTerm("")}
+                className="flex items-center gap-3 p-2 rounded-xl hover:bg-white/10 transition-all"
+              >
                 <img
                   src={image}
                   alt={movie?.title || movie?.name}
-                  className="rounded-xl w-20 h-20 object-cover"
+                  className="w-14 h-16 rounded-lg object-cover"
                 />
-                <p>{movie.title || movie.name}</p>
+
+                <div className="flex flex-col">
+                  <span className="text-white font-medium line-clamp-1">
+                    {movie.title || movie.name}
+                  </span>
+
+                  <span className="text-sm text-gray-400 capitalize">
+                    {movie.media_type}
+                  </span>
+                </div>
               </Link>
             );
           })}

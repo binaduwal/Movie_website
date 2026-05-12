@@ -5,14 +5,12 @@ import MovieSection from "../components/movie/MovieSection";
 import { useMovies } from "../hooks/useMovies";
 import MovieCardSkeleton from "../components/skeletons/MovieCardSkeleton";
 import MovieSectionSkeleton from "../components/skeletons/MovieSectionSkeleton";
-import { motion } from "framer-motion";
-import { useState } from "react";
 import { Heart } from "lucide-react";
 import { useWishListStore } from "../store/useWishListStore";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-toastify";
 
-const IMAGE_BASE_URL = import.meta.env.VITE_IMAGE_URL;
+const IMAGE_BASE_URL = import.meta.env.VITE_IMAGE_BASE_URL;
 const FALLBACK_IMAGE =
   "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg";
 
@@ -20,12 +18,10 @@ const MovieDetail = () => {
   const { id } = useParams();
   const location = useLocation();
   const movieId = Number(id);
-  const [loaded, setLoaded] = useState(false);
   const type = location.pathname.startsWith("/tv") ? "tv" : "movie";
   console.log(type, "type");
 
   const { data: movie, isError, isLoading } = useMovieDetail(movieId, type);
-  console.log(movie, "movie detail");
 
   const similarProduct = `/${type}/${movieId}/similar`;
   const { movies: similarMovies } = useMovies(similarProduct);
@@ -69,7 +65,7 @@ const MovieDetail = () => {
 
   const handleWishList = () => {
 
-    addToWishlist({ id: movieId, title: movie.title, poster_path: movie?.poster_path });
+    addToWishlist({ id: movieId, title: movie.title, poster_path: movie?.poster_path ?? undefined  });
     toast.success("Added to wishlist!");
   };
 
@@ -83,7 +79,6 @@ const MovieDetail = () => {
         <img
           src={backdrop}
           alt={movie?.title}
-          onLoad={() => setLoaded(true)}
           className="w-full h-full object-cover"
         />
       </div>
@@ -93,8 +88,7 @@ const MovieDetail = () => {
           <img
             src={posterpath}
             alt={movie?.title}
-            className="
-          rounded-xl w-full object-cover max-h-[400px]"
+            className="rounded-xl w-full object-cover max-h-[400px]"
           />
           <Button className="w-full text-base text-white" size="lg">
             Trailer

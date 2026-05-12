@@ -9,7 +9,7 @@ const MovieBanner = ({ movie }: movieProps) => {
     ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
     : "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg";
   return (
-    <div className="relative h-56 sm:h-screen overflow-hidden ">
+    <div className="relative h-96 sm:h-screen overflow-hidden ">
       <motion.img
         src={backdrop}
         alt={movie?.title}

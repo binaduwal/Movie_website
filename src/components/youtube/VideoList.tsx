@@ -18,8 +18,8 @@ const VideoList = ({ videos, activeId, onSelect }: Props) => {
           onClick={() => onSelect(video)}
           className={`flex gap-3 cursor-pointer p-2 rounded-lg transition ${
             activeId === video.id
-              ? "bg-gray-200"
-              : "hover:bg-gray-100"
+              ? "bg-gray-800"
+              : "hover:bg-gray-900"
           }`}
         >
           <img
