@@ -27,7 +27,6 @@ const {movies:topRatedSeries}=useMovies('/tv/top_rated',{limit:10})
   };
 
 
-  console.log(nowPlaying, "results");
   return (
     <div className="overflow-x-hidden">
       {isLoading ? (
@@ -48,9 +47,8 @@ const {movies:topRatedSeries}=useMovies('/tv/top_rated',{limit:10})
           ))}
         </Slider>
       </div>
-
-      <MovieSection title="Popular Movies" movies={popular} movieType="movie" />
       <VideoLayout/>
+      <MovieSection title="Popular Movies" movies={popular} movieType="movie" />
       <MovieSection
         title="Top Rated Movies"
         movies={topRatedMovie}

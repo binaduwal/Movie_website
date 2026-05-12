@@ -7,7 +7,7 @@ interface AuthContextType {
   register: (email: string, password: string) => void;
   loading?: boolean;
   isAuthenticated?: boolean;
-  authModalView?: "login" | "register";
+  authModalView: "login" | "register" | null;
   openLogin: () => void;
   openRegister: () => void;
   closeAuthModal: () => void;
